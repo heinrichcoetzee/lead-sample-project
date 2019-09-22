@@ -1,0 +1,64 @@
+lead-modal {
+    /* modals are hidden by default */
+    display: none;
+
+    .lead-modal {
+        /* modal container fixed across whole screen */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        /* z-index must be higher than .lead-modal-background */
+        z-index: 1000;
+        
+        /* enables scrolling for tall modals */
+        overflow: auto;
+      
+        .lead-modal-body {
+            padding: 2rem;
+            background: #fff;
+
+            /* margin exposes part of the modal background */
+            margin: 5rem;
+
+            .lead-modal-header{
+                position: relative;
+                font-size: 1.4rem;
+                color:#1F3890;
+                border-bottom: 2px solid #2D3142;
+                margin-bottom: 1rem;
+            }
+            .lead-modal-close{
+                position: absolute;
+                right: 0;
+                top: 0;
+                font-size: 1rem;
+                color: #2D3142;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .lead-modal-background {
+        /* modal background fixed across whole screen */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        /* semi-transparent black  */
+        background-color: #000;
+        opacity: 0.75;
+        
+        /* z-index must be below .lead-modal and above everything else  */
+        z-index: 900;
+    }
+}
+
+body.lead-modal-open {
+    /* body overflow is hidden to hide main scrollbar when modal window is open */
+    overflow: hidden;
+}

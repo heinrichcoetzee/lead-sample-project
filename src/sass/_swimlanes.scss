@@ -1,0 +1,41 @@
+ 
+body {
+.ngx-dnd-container {
+    background-color: $lightGrey;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+
+
+    &.gu-empty {
+      border: 2px dotted $lightGreen;
+      height: 90%;
+    }
+  
+    &:nth-child(odd) {
+      background-color: inherit;
+    }
+  
+    .ex-moved {
+      background-color: $red;
+    }
+  
+    .ex-over {
+      background-color: rgba(255, 255, 255, 0.3);
+     
+    }
+  }
+
+  .ngx-dnd-box,
+  .ngx-dnd-item {
+
+    background-color: $white;
+    border-radius: .8rem;
+    border: 1px solid $lightGreen;
+    &:hover {
+        border: 2px solid $lightGreen;
+        padding: 9px;
+    }
+  }
+  
+}

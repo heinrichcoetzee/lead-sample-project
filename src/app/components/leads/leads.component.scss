@@ -1,0 +1,25 @@
+@import '~src/sass/main';
+
+
+.leadlanes {
+    display: flex;
+    height: 80%;
+
+      .leadlanes-column {
+      min-width: 15rem; 
+      flex: 1;  
+      background: #F2F2F3;  
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem;
+      h4{
+        text-align: center;
+        border-bottom: 1px solid $grey;
+        font-size: .9rem;
+        font-weight: 400;
+        padding: 1rem 0;
+        }
+    }
+    
+   
+  }

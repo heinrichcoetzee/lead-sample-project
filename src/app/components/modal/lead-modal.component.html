@@ -1,0 +1,12 @@
+<div class="lead-modal">
+    <div class="lead-modal-close" (click)="close()">X</div>
+  
+        <div class="lead-modal-body">
+                <div class="lead-modal-header">
+                        {{header}}
+                        <div class="lead-modal-close" (click)="close()">X</div>
+                </div>
+            <ng-content></ng-content>
+        </div>
+    </div>
+<div class="lead-modal-background"></div>

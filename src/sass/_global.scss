@@ -1,0 +1,126 @@
+body {
+    font-family: $fontFamily !important;
+    margin: 0;
+    padding: 0;
+    background-color: $white;
+    height: 100%;
+}
+
+.white-bg {
+    background-color: #fff;
+}
+
+.grey-bg {
+    background-color: $lightGrey;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.red-text {
+    color: $red;
+}
+
+.btn-primary {
+    background-color: $green;
+    border: none;
+    border-radius: 0;
+
+    &:hover {
+        background-color: $lightGreen;
+    }
+
+    &:active {
+        background-color: $lightGreen !important;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.btn-secondary {
+    background-color: $black;
+    border: none;
+    border-radius: 0;
+
+    &:hover {
+        background-color: $grey;
+    }
+
+    &:active {
+        background-color: $grey !important;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+h2 {
+    font-size: 2rem;
+    color: $darkGrey;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+    border-bottom: 2px solid $green;
+}
+
+.loader {
+    position: absolute;
+    z-index: 6000;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    .text {
+        position: absolute;
+        top: 150px;
+        width: 100%;
+        text-align: center;
+        margin: 0px auto;
+        font-weight: bold;
+    }
+}
+
+// .spinner {
+//     width: 40px;
+//     height: 40px;
+//     border: 3px solid $green;
+//     margin: 100px auto;
+//     -webkit-animation: rotation 1.2s infinite ease-in-out;
+//     animation: rotation 1.2s infinite ease-in-out;
+//     border-radius: 50%;
+// }
+
+.spinner {
+    // display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 100px auto;
+  }
+
+  .spinner:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid $green;
+    border-color: $green transparent $green transparent;
+    animation: rotation 1.2s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+.vh-100 {
+    min-height: 100vh;
+}

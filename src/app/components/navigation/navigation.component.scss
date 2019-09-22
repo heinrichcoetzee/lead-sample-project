@@ -1,0 +1,28 @@
+@import '~src/sass/main';
+
+
+.navbar{
+    background-color: $white;
+    border-bottom: 2px solid $lightGrey;
+    .navbar-brand{
+        color: $green;
+        font-weight: 400;
+        margin-right: 5rem;
+        font-style:italic;
+    }
+    li.nav-item{
+        margin-right: 1rem;
+        >a.nav-link{
+            color: $grey;
+            &:hover{
+                color: $darkGrey;
+            }
+        } 
+        &.active{
+            > a.nav-link{
+                color: $green;
+            }
+            border-bottom: 2px solid $green;
+        }
+    }
+}

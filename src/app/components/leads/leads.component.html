@@ -1,0 +1,44 @@
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-12">
+                
+                <h2>Leads
+                    <button class="btn btn-primary float-right" (click)="addLead()">Add New</button>
+                </h2>
+                <ng-container *ngIf="lanes else loading">
+                <div class="leadlanes">
+                    <div class="leadlanes-column" *ngFor="let lane of lanes">
+                        <h4>
+                            {{lane.stage | stage}}
+                        </h4>
+                
+                        <ngx-dnd-container [model]="lane.leads" [dropZone]="'stage-'+lane.stage"
+                            [dropZones]="['stage-1','stage-2','stage-3','stage-4','stage-5']" (drop)="modelChange($event,lane.stage)">
+                            <ng-template let-item="model">
+                                <div class="w-100 h-100" (click)="openLead(item)">
+                                <div class="lead-title">{{item.name}}</div>
+                                <div class="lead-body">
+                                    <p>Fee {{item.feeValue}}</p>
+                                    <p>Probability {{item.probability}} %</p>
+                                </div>
+                                <div class="lead-footer">{{item.startDate | date:'yyyy-MM-dd'}}</div>
+                                </div>
+                            </ng-template>
+                        </ngx-dnd-container>
+                    </div>
+                </div>
+                </ng-container>
+                <ng-template #loading>
+                    <app-loader-spinner></app-loader-spinner>
+                </ng-template>
+        </div>
+</div>
+
+<lead-modal id="lead-edit-modal" [header]="openedLead?openedLead.name:''">
+    <ng-container *ngIf="openedLead">
+    <a [routerLink]="['/lead/'+openedLead.objectId]">Open Lead</a>
+    <app-lead-form [lead]="openedLead" (save)="saveLead()"></app-lead-form>
+    <app-loader-overlay [saving]="savingLead" message="Saving Lead"></app-loader-overlay>
+    </ng-container>
+</lead-modal>
+
