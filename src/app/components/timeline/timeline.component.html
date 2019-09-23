@@ -1,3 +1,29 @@
-<div class="w-100">
-    <h2>Timeline</h2>
-</div>
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-12">
+
+            <h2>Timeline
+                <button class="btn btn-primary float-right" (click)="toggleIncome()">
+                    <span *ngIf="incomeToggle === 'fullIncome'">Show Weighted Income</span>
+                    <span *ngIf="incomeToggle === 'weightedIncome'">Show Full Income</span>
+                </button>
+            </h2>
+
+            <div class="row">
+                <div class="col-1" *ngFor="let line of timeline;let i=index">
+                    <h4>
+                        {{line.month}}
+                    </h4>
+
+                    <ngx-dnd-container [model]="line.leads" (drop)="updateIncome($event)" [dropZone]="line.month" [dropZones]="months">
+                        <ng-template let-item="model">
+                            <div class="w-100 h-100">
+                                <div class="lead-title">{{item.name}}</div>
+                            </div>
+                        </ng-template>
+                    </ngx-dnd-container>
+
+                    <div class="total">{{line[incomeToggle] | currency:"R "}}</div>
+                </div>
+            </div>
+        </div>

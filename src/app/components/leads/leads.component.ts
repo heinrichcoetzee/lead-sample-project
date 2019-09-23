@@ -4,6 +4,7 @@ import { ILead, InitLead } from 'src/app/shared/interfaces/lead.interface';
 import { ModalService } from '../modal/modal.service';
 import { LeadService } from 'src/app/services/lead.service';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-leads',
   templateUrl: './leads.component.html',
@@ -11,60 +12,68 @@ import { first } from 'rxjs/operators';
 })
 export class LeadsComponent implements OnInit {
 
-  lanes:Lanes[];
-  openedLead:ILead;
-  savingLead:boolean = false;
-  constructor(private modalService:ModalService,private leadService:LeadService) { }
+  lanes: Lanes[];
+  openedLead: ILead;
+  savingLead: boolean = false;
+  constructor(private modalService: ModalService, private leadService: LeadService, private _toastr: ToastrService) { }
 
   ngOnInit() {
-   
+
     this.leadService.fetchLeads()
-    .pipe(first()).
-    subscribe((data:ILead[])=>{
-      this.lanes = new initLanes(5,data).stages; 
-      console.log(this.lanes);
-    })
+      .pipe(first())
+      .subscribe((data: ILead[]) => {
+        this.lanes = new initLanes(5, data).stages;
+      }, (error) => {
+        this._toastr.error(error.message, "Error Retrieving Leads!");
+      });
   }
 
-  openLead(lead:ILead){
+  openLead(lead: ILead) {
     this.openedLead = lead;
     this.modalService.open('lead-edit-modal');
   }
 
-  addLead(){
+  addLead() {
     this.openedLead = new InitLead();
     this.modalService.open('lead-edit-modal');
   }
 
-  modelChange(event,stage:number){
-    console.log(event);
-    console.log(stage);
+  modelChange(event, stage: number) {
     const lead:ILead = event.value;
     lead.stage = stage;
-    this.leadService.createLead(lead).pipe(first())
-    .subscribe((result)=>{
-      console.log("Updated")
-    });
+    this.leadService.createLead(lead)
+      .pipe(first())
+      .subscribe((result) => {
+        console.log("Lead Stage Updated - ", result);
+      }, (error) => {
+        this._toastr.error(error.message, "Error While Updating Stage!");
+      });
   }
 
-  async saveLead(){
+  async saveLead() {
     this.savingLead = true;
-    try{
-    this.openedLead = await this.leadService.createLead(this.openedLead).toPromise();
-    }catch{
+    try {
+      this.openedLead = await this.leadService.createLead(this.openedLead).toPromise();
+    } catch (e) {
       this.savingLead = false;
+      this._toastr.error(e.error.message, "Error Saving Lead!");
       return;
     }
 
-      let findLane = this.lanes.findIndex((lane)=>lane.stage===this.openedLead.stage);
-      let findLead = this.lanes[findLane].leads.findIndex((lane)=>lane.objectId===this.openedLead.objectId);
-      if(findLead > -1){
-        this.lanes[findLane].leads[findLead] = this.openedLead;
-      }else{
-        this.lanes[findLane].leads.push(this.openedLead);
-      }
-      this.modalService.close('lead-edit-modal');
-      this.savingLead = false;
+    let findLane = this.lanes.findIndex((lane) => lane.stage === this.openedLead.stage);
+    let findLead = this.lanes[findLane].leads.findIndex((lane) => lane.objectId === this.openedLead.objectId);
+    if (findLead > -1) {
+      this.lanes[findLane].leads[findLead] = this.openedLead;
+    } else {
+      this.lanes[findLane].leads.push(this.openedLead);
+    }
+    this.modalService.close('lead-edit-modal');
+    this.savingLead = false;
+  }
+
+  closeModal(){
+    this.openedLead = undefined;
+    this.modalService.close('lead-edit-modal');
   }
 
 }

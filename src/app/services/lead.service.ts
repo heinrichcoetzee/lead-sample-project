@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ILead } from '../shared/interfaces/lead.interface';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable()
@@ -19,6 +20,11 @@ export class LeadService {
 
   createLead(lead:ILead):Observable<any>{
     return this.http.post(environment.apiUrl + 'lead',lead,{headers:this.headers})
+    .pipe(
+      catchError(err => {
+        return throwError(err.error);
+      })
+    )
   }
 
 }

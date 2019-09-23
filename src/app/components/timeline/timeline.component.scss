@@ -1,0 +1,16 @@
+@import '~src/sass/main';
+
+.month-grid{
+    background-color: $lightGrey;
+    margin: 0 .5rem;
+}
+.total{
+    vertical-align: bottom;
+    font-weight: bold;
+    border-top: 1px solid $lightGrey;
+    border-bottom: 2px double $lightGrey;
+    position:absolute;
+    bottom: -3rem;
+    width: 100%;
+    text-align: center;
+}

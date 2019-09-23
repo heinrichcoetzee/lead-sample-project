@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ILead, InitLead } from 'src/app/shared/interfaces/lead.interface';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lead-form',
@@ -13,7 +14,7 @@ export class LeadFormComponent implements OnInit {
   @Output() save:EventEmitter<ILead> = new EventEmitter();
   stages = [1,2,3,4,5];
   startDate:NgbDate;
-  constructor() { }
+  constructor(private _toastr:ToastrService) { }
 
   ngOnInit() {
     this.startDate = new NgbDate(
@@ -25,7 +26,11 @@ export class LeadFormComponent implements OnInit {
   }
 
   saveLead(saveLead:NgForm){
-    if(saveLead.valid){
+    if(!this.lead.name){
+      this._toastr.warning("Please give the lead a name","Validation Error");
+    }else if(saveLead.invalid){
+      this._toastr.warning("Pleae complete the lead details","Validation Error");
+    }else{
       this.save.emit(this.lead);
     }
   }

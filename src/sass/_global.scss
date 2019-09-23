@@ -68,33 +68,8 @@ h2 {
     border-bottom: 2px solid $green;
 }
 
-.loader {
-    position: absolute;
-    z-index: 6000;
-    background-color: rgba(255, 255, 255, 0.5);
-
-    .text {
-        position: absolute;
-        top: 150px;
-        width: 100%;
-        text-align: center;
-        margin: 0px auto;
-        font-weight: bold;
-    }
-}
-
-// .spinner {
-//     width: 40px;
-//     height: 40px;
-//     border: 3px solid $green;
-//     margin: 100px auto;
-//     -webkit-animation: rotation 1.2s infinite ease-in-out;
-//     animation: rotation 1.2s infinite ease-in-out;
-//     border-radius: 50%;
-// }
 
 .spinner {
-    // display: inline-block;
     width: 64px;
     height: 64px;
     margin: 100px auto;
@@ -123,4 +98,8 @@ h2 {
 
 .vh-100 {
     min-height: 100vh;
+}
+
+.toast-container .ngx-toastr {
+    width: 400px;
 }

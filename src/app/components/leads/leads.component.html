@@ -18,10 +18,33 @@
                                 <div class="w-100 h-100" (click)="openLead(item)">
                                 <div class="lead-title">{{item.name}}</div>
                                 <div class="lead-body">
-                                    <p>Fee {{item.feeValue}}</p>
-                                    <p>Probability {{item.probability}} %</p>
+                                    <div class="row">
+                                        <div class="col-4">
+                                                Fee
+                                        </div>
+                                        <div class="col-8 text-right text-nowrap">
+                                                {{item.feeValue | currency: "R "}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-4">
+                                                    Probability
+                                            </div>
+                                            <div class="col-8 text-right text-nowrap">
+                                                    {{item.probability}} %
+                                            </div>
+                                        </div>
                                 </div>
-                                <div class="lead-footer">{{item.startDate | date:'yyyy-MM-dd'}}</div>
+                                <div class="lead-footer">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 text-nowrap">
+                                                {{item.startDate | date:'yyyy-MM-dd'}}
+                                        </div>
+                                        <div class="col-12 col-md-6 text-nowrap text-right">
+                                                {{item.duration}} Mos.
+                                        </div>
+                                    </div>
+                                </div>
                                 </div>
                             </ng-template>
                         </ngx-dnd-container>
@@ -36,7 +59,6 @@
 
 <lead-modal id="lead-edit-modal" [header]="openedLead?openedLead.name:''">
     <ng-container *ngIf="openedLead">
-    <a [routerLink]="['/lead/'+openedLead.objectId]">Open Lead</a>
     <app-lead-form [lead]="openedLead" (save)="saveLead()"></app-lead-form>
     <app-loader-overlay [saving]="savingLead" message="Saving Lead"></app-loader-overlay>
     </ng-container>

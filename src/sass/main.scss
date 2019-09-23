@@ -1,6 +1,7 @@
 // main.scss 
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/ngx-toastr/toastr-bs4-alert.scss';
 
 @import "variables";
 @import "swimlanes";
