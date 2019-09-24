@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Lanes, initLanes } from 'src/app/shared/interfaces/lanes.interface';
-import { ILead, InitLead } from 'src/app/shared/interfaces/lead.interface';
+import { Lead, InitLead } from 'src/app/shared/interfaces/lead.interface';
 import { ModalService } from '../modal/modal.service';
 import { LeadService } from 'src/app/services/lead.service';
 import { first } from 'rxjs/operators';
@@ -13,22 +13,22 @@ import { ToastrService } from 'ngx-toastr';
 export class LeadsComponent implements OnInit {
 
   lanes: Lanes[];
-  openedLead: ILead;
+  openedLead: Lead;
   savingLead: boolean = false;
   constructor(private modalService: ModalService, private leadService: LeadService, private _toastr: ToastrService) { }
 
   ngOnInit() {
 
-    this.leadService.fetchLeads()
+    this.leadService.fetchStages(5)
       .pipe(first())
-      .subscribe((data: ILead[]) => {
-        this.lanes = new initLanes(5, data).stages;
+      .subscribe((data: Lanes[]) => {
+        this.lanes = data;
       }, (error) => {
         this._toastr.error(error.message, "Error Retrieving Leads!");
       });
   }
 
-  openLead(lead: ILead) {
+  openLead(lead: Lead) {
     this.openedLead = lead;
     this.modalService.open('lead-edit-modal');
   }
@@ -39,7 +39,7 @@ export class LeadsComponent implements OnInit {
   }
 
   modelChange(event, stage: number) {
-    const lead:ILead = event.value;
+    const lead:Lead = event.value;
     lead.stage = stage;
     this.leadService.createLead(lead)
       .pipe(first())

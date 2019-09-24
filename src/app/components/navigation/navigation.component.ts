@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit,OnDestroy {
-  url:string;
+  url:string = "/leads";
   $destroy:Subject<void> = new Subject();
   constructor(private router:Router) { 
     this.router.events.pipe(takeUntil(this.$destroy)).subscribe((event:Event)=>{

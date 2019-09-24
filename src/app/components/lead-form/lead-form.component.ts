@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ILead, InitLead } from 'src/app/shared/interfaces/lead.interface';
+import { Lead, InitLead } from 'src/app/shared/interfaces/lead.interface';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./lead-form.component.scss']
 })
 export class LeadFormComponent implements OnInit {
-  @Input() lead:ILead = new InitLead();
-  @Output() save:EventEmitter<ILead> = new EventEmitter();
+  @Input() lead:Lead = new InitLead();
+  @Output() save:EventEmitter<Lead> = new EventEmitter();
   stages = [1,2,3,4,5];
   startDate:NgbDate;
   constructor(private _toastr:ToastrService) { }

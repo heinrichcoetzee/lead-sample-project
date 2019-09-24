@@ -1,5 +1,5 @@
 
-export interface ILead{
+export interface Lead{
     name:string;
     feeValue:number;
     startDate:string | Date;
