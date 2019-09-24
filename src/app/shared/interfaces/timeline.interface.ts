@@ -1,34 +1,28 @@
-import { ILead } from './lead.interface';
+import { Lead } from './lead.interface';
 
 export interface timeline{
-    month:string;
-    leads:ILead[];
+    lead:Lead;
     fullIncome:number;
     weightedIncome:number;
+    startMonth:number;
+    endMonth:number;
 }
 
-export const calcFullIncome = (leads:ILead[]) =>{
-   return leads.reduce((total, lead) => total + (lead.feeValue / lead.duration),0);
-}
-export const calcWeightedIncome = (leads:ILead[]) =>{
-    return leads.reduce((total,lead)=>{
-        return ((lead.feeValue / lead.duration) * lead.probability) + total;
-    },0)
- }
 export class InitTimeline{
     timeline:timeline[] = [];
     months = ["January","February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    constructor(leads:ILead[]){
-        let monthCount = 0;
-        for(let month of this.months){
-            const filteredLeads = leads?leads.filter(l=>new Date(l.startDate).getMonth() === monthCount):[];
+    constructor(leads:Lead[]){
+        
+        for(let lead of leads){
+            const start = new Date(lead.startDate).getMonth()+1;
+            const end = (start-1) + lead.duration;
             this.timeline.push({
-                month:month,
-                leads:filteredLeads,
-                fullIncome:calcFullIncome(filteredLeads),
-                weightedIncome:calcWeightedIncome(filteredLeads)
+                lead:lead,
+                startMonth : new Date(lead.startDate).getMonth(),
+                endMonth : end>12?12:end,
+                fullIncome:(lead.feeValue / lead.duration),
+                weightedIncome:((lead.feeValue / lead.duration) * lead.probability)
             });
-            monthCount++;
         }
     }
 }

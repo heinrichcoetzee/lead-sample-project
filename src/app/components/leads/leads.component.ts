@@ -56,7 +56,7 @@ export class LeadsComponent implements OnInit {
       this.openedLead = await this.leadService.createLead(this.openedLead).toPromise();
     } catch (e) {
       this.savingLead = false;
-      this._toastr.error(e.error.message, "Error Saving Lead!");
+      this._toastr.error(e.message, "Error Saving Lead!");
       return;
     }
 

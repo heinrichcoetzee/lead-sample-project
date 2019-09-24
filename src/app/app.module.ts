@@ -17,6 +17,7 @@ import { LoaderSpinnerComponent } from './components/loaders/loader-spinner/load
 import { LoaderOverlayComponent } from './components/loaders/loader-overlay/loader-overlay.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IncomeToggleCasePipe } from './shared/pipes/income-toggle-case.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StagePipe,
     LeadFormComponent,
     LoaderSpinnerComponent,
-    LoaderOverlayComponent
+    LoaderOverlayComponent,
+    IncomeToggleCasePipe
   ],
   imports: [
     BrowserModule,
