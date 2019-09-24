@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit,OnDestroy {
   $destroy:Subject<void> = new Subject();
   constructor(private router:Router) { 
     this.router.events.pipe(takeUntil(this.$destroy)).subscribe((event:Event)=>{
-        if(event instanceof NavigationEnd){
+        if(event instanceof NavigationEnd && event.url !== '/'){
           this.url = event.url;
         }
     })
